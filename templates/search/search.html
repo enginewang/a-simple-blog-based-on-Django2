@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load highlight %}
+
+{% block content %}
+
+    <div class="main">
+        <form method="get" action=".">
+            <table>
+                {{ form.as_table }}
+                <tr>
+                    <td></td>
+                    <td>
+                        <input type="submit" value="Search">
+                    </td>
+                </tr>
+            </table>
+
+
+            {% if query %}
+                <h1>以下是搜索结果: </h1>
+            {% endif %}
+            <br>
+            {% for result in page.object_list.all %}
+                <h1>什么玩意</h1>num
+                <div class="article-list">
+                    <div class="item">
+                        <div class="title">
+                            <a href="#">{{ forloop.counter }} , {% highlight result.title with query %}</a>
+                        </div>
+                        <div class="content">
+                            {% highlight result.synopsis with query %}
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <div class="no-post">没有搜索到相关内容，请重新搜索</div>
+            {% endfor %}
+        </form>
+    </div>
+
+
+{% endblock %}

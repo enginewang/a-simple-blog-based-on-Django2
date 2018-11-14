@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block title %}
+    {{ article.title }}
+{% endblock %}
+
+<link rel="stylesheet" href="{% static 'css/semantic-ui.css' %}">
+<link rel="stylesheet" href="{% static 'css/main.css' %}">
+{% block content %}
+    <div class="main">
+        <div class="article">
+            <div class="item">
+                <div class="title">
+                    <h2>{{ article.title }}</h2>
+                </div>
+                <label class="status">发布于:{{ article.pub_time }}</label>
+                {% for tag in article.tag.all %}
+                    <label class="ui mini tag label">
+                        {{ tag }}
+                    </label>
+                    <label>&nbsp;&nbsp</label>
+                {% endfor %}
+                <label>&nbsp;&nbsp</label>
+                <label class="ui mini label">
+                    &nbsp;&nbsp;&nbsp;&nbsp;{{ article.category }}&nbsp;&nbsp;&nbsp;&nbsp;
+                </label>
+                <div class="content">
+                    {{ article.content|safe }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="left-button">
+        {% if article.id > 1 %}
+            <a href="{% url 'blog:article_page' article.prev_id %}">
+                <div class="ui vertical animated button" tabindex="0">
+                    <div class="visible content">上一篇</div>
+                    <div class="hidden content">
+                        <i class="fa fa-angle-double-left" aria-hidden="true"></i>
+                    </div>
+                </div>
+            </a>
+        {% endif %}
+    </div>
+    <div class="right-button">
+            <a href="{% url 'blog:article_page' article.next_id %}">
+                <div class="ui vertical animated button" tabindex="0">
+                    <div class="visible content">下一篇</div>
+                    <div class="hidden content">
+                        <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    </div>
+                </div>
+            </a>
+    </div>
+
+
+{% endblock %}

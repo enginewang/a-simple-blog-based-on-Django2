@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    Yicheng's Blog
+{% endblock %}
+
+
+<link rel="stylesheet" href="{% static 'css/main.css' %}">
+<link rel="stylesheet" href="{% static 'css/semantic-ui.css' %}">
+
+{% block content %}
+
+    <div class="main">
+        {% for article in articles.object_list reversed %}
+            <div class="article-list">
+                <div class="item">
+                    <div class="title">
+                        <a href="{% url 'blog:article_page' article.id %}">{{ article.title }}</a>
+                    </div>
+                    <label class="status">发布于:{{ article.pub_time }}</label>
+                    {% for tag in article.tag.all %}
+                        <label class="ui mini tag label">
+                            {{ tag }}
+                        </label>
+                        <label>&nbsp;&nbsp</label>
+                    {% endfor %}
+                    <label>&nbsp;&nbsp</label>
+                    <label class="ui mini label">
+                        &nbsp;&nbsp;&nbsp;&nbsp;{{ article.category }}&nbsp;&nbsp;&nbsp;&nbsp;
+                    </label>
+                    <div class="content">
+                        {{ article.synopsis|truncatechars:150 }}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="my_pagination">
+        <div class="ui pagination menu">
+            {% if articles.has_previous %}
+                <a class="item prev" href="?{{ articles.previous_page_number.querystring }}">上一页</a>
+            {% else %}
+                <a class="disabled item">上一页</a>
+            {% endif %}
+
+            {% for page in articles.pages %}
+                {% if page %}
+                    {% ifequal page articles.number %}
+                        <a class="active item">{{ page }}</a>
+                    {% else %}
+                        <a class="item" href="?{{ page.querystring }}" class="page">{{ page }}</a>
+                    {% endifequal %}
+                {% else %}
+                    <a class="disabled item">
+                        ...
+                    </a>
+                {% endif %}
+            {% endfor %}
+            {% if articles.has_next %}
+                <a class="item next" href="?{{ articles.next_page_number.querystring }}">下一页</a>
+            {% else %}
+                <a class="disabled item">下一页</a>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+

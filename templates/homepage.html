@@ -1,0 +1,49 @@
+{% load static %}
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{% static 'css/semantic-ui.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'font-awesome/css/font-awesome.css' %}">
+    <link rel="stylesheet" href="{% static 'md_css/github.css' %}">
+</head>
+
+<body style="overflow-y:hidden" >
+<body>
+<div class="home_menu">
+    <div class="ui inverted huge top fixed borderless menu">
+    <a href="/" class='item'> 王 毅 诚 的 站 点&nbsp;&nbsp;<i class="fa fa-home fa-fw"></i></a>
+    <a href="/blog/" class='item'>&nbsp;博 客&nbsp;&nbsp;<i class="fa fa-book" aria-hidden="true"></i></a>
+    <a href="#" class='item'>&nbsp;资 源&nbsp;&nbsp;<i class="fa fa-folder" aria-hidden="true"></i></a>
+    <a href="#" class='item'>&nbsp;其 他&nbsp;&nbsp;<i class="fa fa-cog" aria-hidden="true"></i></a>
+    <div class="right menu">
+        <a href="#" class='item'>关 于&nbsp&nbsp&nbsp<i class="fa fa-user" aria-hidden="true"></i></a>
+    </div>
+    </div>
+</div>
+</div>
+
+
+
+<div class="headline">
+    <h1>Welcome to my site !</h1>
+    <div class="home_button">
+        <a class="ui huge inverted animated button" href="{% url 'blog:blog_index' %}">
+            <div class="visible content"> Start </div>
+            <div class="hidden content">
+                <i class="fa fa-arrow-right" aria-hidden="true"></i>
+            </div>
+        </a>
+    </div>
+
+</div>
+<div class="home_img">
+    <img src="https://res.cloudinary.com/dbmkzs2ez/image/upload/v1541919207/cover.png" width="100px">
+</div>
+{% block content %}
+{% endblock %}
+
+</body>
+</html>

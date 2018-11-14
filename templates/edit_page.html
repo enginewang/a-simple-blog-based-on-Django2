@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+   <div class="main">
+     <div class="article-list">
+        <p style="text-align: center;font-size: xx-large;">编辑文章</p>
+       <div class="item">
+
+             <form action="{% url 'blog:edit_action' %}" method="post">
+                 {% csrf_token %}
+                 {% if article %}
+                     <input type="hidden" name="article_id" value="{{ article.id }}">
+                 <label>标题
+                      <span class="ui fluid input">
+                            <input type="text" name="title" value="{{ article.title }}">
+                      </span>
+                 </label>
+                 <br>
+                 <div class="field">
+                 <label>内容
+                      <span class="ui fluid input">
+                            <textarea name="content" id="" cols="200" rows="20">{{ article.content }}</textarea>
+                      </span>
+                 </label>
+                 </div>
+                  {% else %}
+                     <input type="hidden" name="article_id" value = '0'>
+                 <label>标题
+                      <span class="ui fluid input">
+                            <input type="text" name="title">
+                      </span>
+                 </label>
+                 <br>
+                 <div class="field">
+                 <label>内容
+                      <span class="ui fluid input">
+                            <textarea name="content" id="" cols="200" rows="20"></textarea>
+                      </span>
+                 </label>
+                 </div>
+                 {% endif %}
+                 <div class="block"></div>
+                     <input type="submit" value="提交">
+             </form>
+       </div>
+       </div>
+         <br>
+     </div>
+{% endblock %}
